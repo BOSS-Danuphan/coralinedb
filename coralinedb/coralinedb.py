@@ -180,17 +180,27 @@ class BaseDB:
         """
         pass
 
-    def query(self, sql_statement, db_name=None):
+    def query(self, sql_statement, db_name=None, index_col=None, params=None, parse_dates=None):
         """
         Run SQL query
         :param sql_statement: SQL statement (str)
         :param db_name: database name
+        :param index_col: Column(s) to set as index(MultiIndex)
+        :param params: parameters to pass to execute method
+        :param parse_dates: column names to parse as dates
         :return:
         """
         # Create Connection
         engine, connection = self.create_connection(db_name)
 
-        result = pd.read_sql(sql_statement, connection, coerce_float=True)
+        result = pd.read_sql(
+            sql=sql_statement,
+            con=connection,
+            coerce_float=True,
+            index_col=index_col,
+            params=params,
+            parse_dates=parse_dates
+        )
 
         # Close connection
         connection.close()
