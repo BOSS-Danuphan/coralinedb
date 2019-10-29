@@ -191,9 +191,9 @@ class BaseDB:
         # Create Connection
         engine, connection = self.create_connection(db_name)
 
-        kargs.pop("sql", None)
-        kargs.pop("con", None)
-        kargs.pop("coerce_float", None)
+        kwargs.pop("sql", None)
+        kwargs.pop("con", None)
+        kwargs.pop("coerce_float", None)
 
         result = pd.read_sql(
             sql=sql_statement,
