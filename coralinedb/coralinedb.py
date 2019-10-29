@@ -193,10 +193,12 @@ class BaseDB:
 
         kargs.pop("sql", None)
         kargs.pop("con", None)
+        kargs.pop("coerce_float", None)
 
         result = pd.read_sql(
             sql=sql_statement,
             con=connection,
+            coerce_float=True,
             **kwargs
         )
 
